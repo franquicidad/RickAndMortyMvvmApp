@@ -17,6 +17,7 @@ import com.franco.rickandmortymvvmapp.ui.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val viewModel:MainViewModel by viewModels()

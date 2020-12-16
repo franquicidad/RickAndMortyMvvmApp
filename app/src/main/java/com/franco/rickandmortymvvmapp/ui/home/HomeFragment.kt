@@ -24,7 +24,7 @@ import com.franco.rickandmortymvvmapp.ui.RickMortyCharacterAdapter
 import com.franco.rickandmortymvvmapp.visible
 import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class HomeFragment(
     ) : Fragment(R.layout.fragment_home) {
 
