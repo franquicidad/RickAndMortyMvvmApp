@@ -1,18 +1,22 @@
 package com.franco.rickandmortymvvmapp.ui.home
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.franco.rickandmortymvvmapp.data.domain.Character
 import com.franco.rickandmortymvvmapp.data.domain.Repository
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import okhttp3.internal.notify
+import javax.inject.Inject
 
-class HomeViewModel(
+
+class HomeViewModel @ViewModelInject constructor(
     private val repository: Repository
 ) : ViewModel() {
 

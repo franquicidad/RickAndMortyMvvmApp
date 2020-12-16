@@ -20,18 +20,15 @@ import com.franco.rickandmortymvvmapp.data.network.RemoteDataSource
 import com.franco.rickandmortymvvmapp.databinding.FragmentHomeBinding
 import com.franco.rickandmortymvvmapp.lastVisibleEvents
 import com.franco.rickandmortymvvmapp.ui.RickMortyCharacterAdapter
-import com.franco.rickandmortymvvmapp.ui.dashboard.DashboardViewModel
-import com.franco.rickandmortymvvmapp.ui.viewModelFactory
+
 import com.franco.rickandmortymvvmapp.visible
+import dagger.hilt.android.AndroidEntryPoint
+
 
 class HomeFragment(
-    private val repository: Repository,
-    private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource
-    ) : Fragment() {
+    ) : Fragment(R.layout.fragment_home) {
 
-    private lateinit var factory: viewModelFactory
-    private lateinit var homeViewModel: HomeViewModel
+    private  val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -79,9 +76,7 @@ class HomeFragment(
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val repository =Repository(localDataSource,remoteDataSource)
-        factory = viewModelFactory(repository)
-        homeViewModel =  ViewModelProvider(this,factory).get(HomeViewModel::class.java)
+
         homeViewModel.characters
     }
 }

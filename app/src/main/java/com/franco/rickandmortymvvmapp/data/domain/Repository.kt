@@ -2,9 +2,14 @@ package com.franco.rickandmortymvvmapp.data.domain
 
 import com.franco.rickandmortymvvmapp.data.database.LocalDataSource
 import com.franco.rickandmortymvvmapp.data.network.RemoteDataSource
+import dagger.Provides
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Repository(
+
+class Repository @Inject constructor (
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) {
