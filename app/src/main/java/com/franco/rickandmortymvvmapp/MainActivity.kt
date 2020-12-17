@@ -1,21 +1,15 @@
 package com.franco.rickandmortymvvmapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.franco.rickandmortymvvmapp.data.database.LocalDataSource
-import com.franco.rickandmortymvvmapp.data.domain.Repository
-import com.franco.rickandmortymvvmapp.data.network.RemoteDataSource
 import com.franco.rickandmortymvvmapp.ui.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
