@@ -1,8 +1,11 @@
 package com.franco.rickandmortymvvmapp.di
 
 import com.franco.rickandmortymvvmapp.data.database.LocalDataSource
+import com.franco.rickandmortymvvmapp.data.database.LocalDataSourceImpl
+import com.franco.rickandmortymvvmapp.data.domain.Repository
 import com.franco.rickandmortymvvmapp.data.domain.RepositoryImpl
 import com.franco.rickandmortymvvmapp.data.network.RemoteDataSource
+import com.franco.rickandmortymvvmapp.data.network.RemoteDataSourceImpl
 import com.franco.rickandmortymvvmapp.ui.home.HomeViewModel
 import dagger.Module
 import dagger.Provides
@@ -16,10 +19,21 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun provideLocalDataSource():LocalDataSource{
+        return LocalDataSourceImpl()
+    }
+  @Singleton
+    @Provides
+    fun provideRemoteDataSource():RemoteDataSource{
+        return RemoteDataSourceImpl()
+    }
+
+    @Singleton
+    @Provides
     fun provideRepository(
         localDataSource: LocalDataSource,
         remoteDataSource: RemoteDataSource
-    ): RepositoryImpl {
+    ): Repository {
         return RepositoryImpl(localDataSource, remoteDataSource)
     }
 

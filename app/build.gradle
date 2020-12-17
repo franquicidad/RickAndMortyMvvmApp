@@ -93,14 +93,7 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.2.5'
     kapt 'androidx.room:room-compiler:2.2.5'
 
-    //Dagger2
-    def dagger ="2.22"
-    api "com.google.dagger:dagger:$dagger"
-    annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
 
-    api "com.google.dagger:dagger-android:$dagger"
-    api "com.google.dagger:dagger-android-support:$dagger" // if you use the support libraries
-    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger"
 
     testImplementation 'junit:junit:4.13.1'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1'
