@@ -1,8 +1,12 @@
 package com.franco.rickandmortymvvmapp
 
 import android.view.View
+import android.widget.ImageView
+import android.widget.ProgressBar
+import androidx.lifecycle.R
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
@@ -41,3 +45,15 @@ val RecyclerView.lastVisibleEvents: Flow<Int>
         addOnScrollListener(listener)
         awaitClose { removeOnScrollListener(listener) }
     }.conflate()
+
+
+fun ImageView.loadUrl(completeUrl: String) {
+
+    Glide
+            .with(this)
+            .load(completeUrl)
+
+            .into(this)
+
+
+}

@@ -1,7 +1,9 @@
 package com.franco.rickandmortymvvmapp.data.domain
 
 import com.franco.rickandmortymvvmapp.data.database.LocalDataSource
+import com.franco.rickandmortymvvmapp.data.database.LocalDataSourceImpl
 import com.franco.rickandmortymvvmapp.data.network.RemoteDataSource
+import com.franco.rickandmortymvvmapp.data.network.RemoteDataSourceImpl
 import dagger.Provides
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
@@ -10,8 +12,8 @@ import javax.inject.Singleton
 
 
 class RepositoryImpl  (
-    private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource
+    private val localDataSource: LocalDataSourceImpl,
+    private val remoteDataSource: RemoteDataSourceImpl
 ):Repository {
     companion object{
         const val  PAGE_SIZE = 20

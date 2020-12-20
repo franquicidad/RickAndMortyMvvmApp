@@ -8,17 +8,17 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class RickAndMorty :Application() {
-    lateinit var db: CharactersDatabase
-        private set
+    //lateinit var db: CharactersDatabase
+      //  private set
 
     override fun onCreate() {
         super.onCreate()
 
-        db = Room.databaseBuilder(
-            this,
-            CharactersDatabase::class.java,
-            "character-db"
-        ).build()
+//        db = Room.databaseBuilder(
+//            this,
+//            CharactersDatabase::class.java,
+//            "character-db"
+//        ).build()
     }
 }
 

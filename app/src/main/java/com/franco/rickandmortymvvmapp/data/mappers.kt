@@ -22,3 +22,5 @@ fun  Character.toDatabaseModel(): DatabaseModel=
 
 fun DatabaseModel.fromDbToDomainModel(): Character=
     Character(id, image, name, species, characterDetailUrl)
+fun NetworkModel.fromNetworkToDatabaseModel():DatabaseModel=
+        DatabaseModel(id, image, name, species, characterDetailUrl)

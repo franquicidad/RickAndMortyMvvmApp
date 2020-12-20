@@ -6,7 +6,7 @@ import com.franco.rickandmortymvvmapp.data.toDatabaseModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class CharacterDatabaseSource(db:CharactersDatabase) :LocalDataSource{
+abstract  class CharacterDatabaseSource(db:CharactersDatabase) :LocalDataSource{
     private val characterDao= db.CharacterDAO()
     override suspend fun size(): Int =
         characterDao.characterCount()
