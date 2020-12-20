@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.franco.rickandmortymvvmapp.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailMortyFragment"
+            app:destination="@id/detailMortyFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,5 +26,13 @@
         android:name="com.franco.rickandmortymvvmapp.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/detailMortyFragment"
+        android:name="com.franco.rickandmortymvvmapp.ui.detail.DetailMortyFragment"
+        android:label="DetailMortyFragment" >
+        <action
+            android:id="@+id/action_detailMortyFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
 </navigation>

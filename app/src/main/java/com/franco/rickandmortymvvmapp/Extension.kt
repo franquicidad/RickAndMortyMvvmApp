@@ -1,8 +1,11 @@
 package com.franco.rickandmortymvvmapp
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.annotation.LayoutRes
 import androidx.lifecycle.R
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,4 +59,8 @@ fun ImageView.loadUrl(completeUrl: String) {
             .into(this)
 
 
+}
+fun ViewGroup.inflate(@LayoutRes layout: Int): View {
+    val view = LayoutInflater.from(context).inflate(layout, this, false)
+    return view
 }

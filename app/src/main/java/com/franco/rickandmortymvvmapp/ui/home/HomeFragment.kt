@@ -5,9 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.franco.rickandmortymvvmapp.R
@@ -29,6 +32,8 @@ class HomeFragment(
     private  val homeViewModel: HomeViewModel by viewModels()
     lateinit var adapter: RickAdapter
      var list = emptyList<Character>()
+    var navController: NavController? = null
+
     lateinit var layoutManager:GridLayoutManager
 
 
@@ -38,13 +43,10 @@ class HomeFragment(
             savedInstanceState: Bundle?
     ): View? {
 
-
-//        homeViewModel =
-//                ViewModelProvider(this).get(HomeViewModel::class.java)
-
-        adapter = RickAdapter(list)
         val binding = FragmentHomeBinding.inflate(layoutInflater).apply {
-            // attach everything related to viewBinding
+
+           recyclerCharacter.adapter = RickAdapter(list)
+
             lifecycleOwner = this@HomeFragment
             viewModel = homeViewModel
 
@@ -59,7 +61,6 @@ class HomeFragment(
                 adapter = RickAdapter(it)
                 recyclerCharacter.layoutManager =layoutManager
                 recyclerCharacter.adapter = adapter
-
 
                 //adapter.submitList(it)
             }
