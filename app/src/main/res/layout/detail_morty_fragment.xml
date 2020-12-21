@@ -10,9 +10,10 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@android:color/darker_gray"
         tools:context=".MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -27,18 +28,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorPrimary"
+                app:contentScrim="@android:color/transparent"
+                app:expandedTitleTextAppearance="@android:color/transparent"
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
                 app:title="Pomeranian">
 
                 <ImageView
                     android:id="@+id/image"
-                    android:layout_width="320dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/rick"
-                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center|end"
-                    android:layout_marginRight="10dp">
+                    android:scaleType="centerCrop"
+
+                    app:layout_collapseMode="pin"
+                    android:src="@drawable/rick">
 
                 </ImageView>
 
@@ -58,7 +61,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:background="@drawable/layout_card"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -77,7 +79,6 @@
                     android:fontFamily="@font/audiowide"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
-
                     android:textStyle="bold"
                     android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
@@ -98,6 +99,19 @@
                     app:layout_constraintStart_toStartOf="@id/character_name"
                     app:layout_constraintTop_toBottomOf="@id/character_name" />
 
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:padding="45dp"
+                    android:fontFamily="@font/audiowide"
+                    android:lineSpacingExtra="2dp"
+                    android:text="@string/randomText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
@@ -105,9 +119,9 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:baselineAlignBottom="false"
             android:src="@drawable/ic_baseline_favorite_24"
             app:fabSize="normal"
+            android:elevation="15dp"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="end|bottom"
             android:layout_marginRight="30dp"

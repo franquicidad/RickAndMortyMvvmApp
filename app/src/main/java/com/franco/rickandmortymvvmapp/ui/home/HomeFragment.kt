@@ -28,20 +28,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment(
     ) : Fragment(R.layout.fragment_home) {
 
-
     private  val homeViewModel: HomeViewModel by viewModels()
     lateinit var adapter: RickAdapter
      var list = emptyList<Character>()
-    var navController: NavController? = null
-
     lateinit var layoutManager:GridLayoutManager
-
-
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val binding = FragmentHomeBinding.inflate(layoutInflater).apply {
 
@@ -49,8 +40,6 @@ class HomeFragment(
 
             lifecycleOwner = this@HomeFragment
             viewModel = homeViewModel
-
-
             lifecycleScope.collectFlow(homeViewModel.spinner){
                 progress.visible = it
             }
@@ -61,8 +50,6 @@ class HomeFragment(
                 adapter = RickAdapter(it)
                 recyclerCharacter.layoutManager =layoutManager
                 recyclerCharacter.adapter = adapter
-
-                //adapter.submitList(it)
             }
             lifecycleScope.collectFlow(recyclerCharacter.lastVisibleEvents){
                 homeViewModel.notifyLastVisible(it)
@@ -76,7 +63,6 @@ class HomeFragment(
             })
 
         }
-
         return binding.root
     }
 
