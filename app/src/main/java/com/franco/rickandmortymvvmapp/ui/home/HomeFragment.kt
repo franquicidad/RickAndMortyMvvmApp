@@ -18,11 +18,13 @@ import com.franco.rickandmortymvvmapp.collectFlow
 import com.franco.rickandmortymvvmapp.data.domain.Character
 import com.franco.rickandmortymvvmapp.databinding.FragmentHomeBinding
 import com.franco.rickandmortymvvmapp.lastVisibleEvents
+import com.franco.rickandmortymvvmapp.ui.PagingAdapter
 import com.franco.rickandmortymvvmapp.ui.RickAdapter
 import com.franco.rickandmortymvvmapp.ui.RickMortyCharacterAdapter
 
 import com.franco.rickandmortymvvmapp.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class HomeFragment(
@@ -32,11 +34,12 @@ class HomeFragment(
     lateinit var adapter: RickAdapter
      var list = emptyList<Character>()
     lateinit var layoutManager:GridLayoutManager
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val binding = FragmentHomeBinding.inflate(layoutInflater).apply {
 
-           recyclerCharacter.adapter = RickAdapter(list)
+           recyclerCharacter.adapter = PagingAdapter(lifecycleScope)
 
             lifecycleOwner = this@HomeFragment
             viewModel = homeViewModel
@@ -45,6 +48,9 @@ class HomeFragment(
             }
             lifecycleScope.collectFlow(homeViewModel.characters){
 
+            it.forEach {
+                Log.i("List","${it.id}:  ${it.name}")
+            }
                 layoutManager = recyclerCharacter.layoutManager as GridLayoutManager
 
                 adapter = RickAdapter(it)

@@ -20,12 +20,8 @@ class HomeViewModel @ViewModelInject constructor(
     val spinner : StateFlow <Boolean> get()=_spinner
 
     val characters :Flow<List<Character>> get() = repository.getCharactersRepo()
-
-
     init {
         viewModelScope.launch { notifyLastVisible(0) }
-
-
     }
 
      fun notifyLastVisible(lastVisible: Int) {
