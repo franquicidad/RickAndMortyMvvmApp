@@ -3,6 +3,9 @@ package com.franco.rickandmortymvvmapp.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +22,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class PagingAdapter (private val scope: CoroutineScope) :
     ListAdapter<Character, PagingAdapter.ItemViewHolder>(DiffCallBackFromAdapter()) {
 
+    var navController: NavController? = null
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.view_character,parent,false)
@@ -29,7 +35,13 @@ class PagingAdapter (private val scope: CoroutineScope) :
         val item =getItem(position)
         bind(item)
         scope.collectFlow(itemView.onClickEvents){
-
+            val bundle = bundleOf(
+                "characterName" to item.name,
+                "species" to item.species,
+                "image" to item.image
+            )
+            navController = Navigation.findNavController(it)
+            navController!!.navigate(R.id.action_navigation_home_to_detailMortyFragment, bundle)
         }
     }
 
