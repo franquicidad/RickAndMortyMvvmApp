@@ -24,6 +24,7 @@ import com.franco.rickandmortymvvmapp.ui.RickMortyCharacterAdapter
 
 import com.franco.rickandmortymvvmapp.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
@@ -31,15 +32,17 @@ class HomeFragment(
     ) : Fragment(R.layout.fragment_home) {
 
     private  val homeViewModel: HomeViewModel by viewModels()
-    lateinit var adapter: RickAdapter
+   //  lateinit var adapter: RickAdapter
      var list = emptyList<Character>()
-    lateinit var layoutManager:GridLayoutManager
+    //lateinit var layoutManager:GridLayoutManager
 
+    @ExperimentalCoroutinesApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val binding = FragmentHomeBinding.inflate(layoutInflater).apply {
 
-           recyclerCharacter.adapter = PagingAdapter(lifecycleScope)
+           val pagingAdapter = PagingAdapter(lifecycleScope)
+            recyclerCharacter.adapter=pagingAdapter
 
             lifecycleOwner = this@HomeFragment
             viewModel = homeViewModel
@@ -47,19 +50,20 @@ class HomeFragment(
                 progress.visible = it
             }
             lifecycleScope.collectFlow(homeViewModel.characters){
+                pagingAdapter.submitList(it)
+//            it.forEach {
+//                Log.i("List","${it.id}:  ${it.name}")
+//            }
 
-            it.forEach {
-                Log.i("List","${it.id}:  ${it.name}")
-            }
-                layoutManager = recyclerCharacter.layoutManager as GridLayoutManager
+//                adapter = RickAdapter(it)
+//                recyclerCharacter.adapter = adapter
 
-                adapter = RickAdapter(it)
-                recyclerCharacter.layoutManager =layoutManager
-                recyclerCharacter.adapter = adapter
             }
             lifecycleScope.collectFlow(recyclerCharacter.lastVisibleEvents){
                 homeViewModel.notifyLastVisible(it)
             }
+            val  layoutManager = recyclerCharacter.layoutManager as GridLayoutManager
+
 
             recyclerCharacter.addOnScrollListener(object : RecyclerView.OnScrollListener(){
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -75,6 +79,6 @@ class HomeFragment(
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        homeViewModel.characters
+        //homeViewModel.characters
     }
 }

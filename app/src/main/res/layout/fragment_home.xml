@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
-            tools:itemCount="16"
+            tools:itemCount="50"
             tools:listitem="@layout/view_character"
             >
 
