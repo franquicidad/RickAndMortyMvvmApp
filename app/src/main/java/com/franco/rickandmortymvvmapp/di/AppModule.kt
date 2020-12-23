@@ -13,6 +13,7 @@ import com.franco.rickandmortymvvmapp.data.network.RMService
 import com.franco.rickandmortymvvmapp.data.network.RemoteDataSource
 import com.franco.rickandmortymvvmapp.data.network.RemoteDataSourceImpl
 import com.franco.rickandmortymvvmapp.data.network.RickAndMortyApi
+import com.franco.rickandmortymvvmapp.ui.detail.DetailMortyViewModel
 import com.franco.rickandmortymvvmapp.ui.home.HomeViewModel
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -77,6 +78,12 @@ object AppModule {
     @Provides
     fun providesRepoToVm(repositoryImpl: RepositoryImpl): HomeViewModel {
         return HomeViewModel(repositoryImpl)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDetailViewModel(repositoryImpl: RepositoryImpl):DetailMortyViewModel{
+        return  DetailMortyViewModel(repositoryImpl)
     }
 
 
