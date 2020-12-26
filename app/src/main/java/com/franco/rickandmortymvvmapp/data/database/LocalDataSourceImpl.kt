@@ -11,8 +11,6 @@ class LocalDataSourceImpl @Inject constructor(
         private val db:CharactersDatabase
 ): LocalDataSource {
 
-
-
     override suspend fun size(): Int =
          db.CharacterDAO().characterCount()
 
@@ -25,4 +23,9 @@ class LocalDataSourceImpl @Inject constructor(
             db.CharacterDAO().getAllCharacters()?.map { characters ->
                 characters.map { it.fromDbToDomainModel() }
             }
+
+    override fun getListByQuery(query: String): Flow<List<Character>> =
+        db.CharacterDAO().getListBySearchBar(query).map { characters->
+            characters.map { it.fromDbToDomainModel() }
+        }
 }

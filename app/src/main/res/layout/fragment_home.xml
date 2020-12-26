@@ -12,7 +12,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.HomeFragment">
+        tools:context=".ui.home.HomeFragment"
+        android:background="@android:color/black"
+        >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_character"
@@ -24,6 +26,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
+            android:paddingStart="20dp"
+            android:background="@android:color/black"
             tools:itemCount="50"
             tools:listitem="@layout/view_character"
             >

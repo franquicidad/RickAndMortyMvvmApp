@@ -22,6 +22,9 @@ class RepositoryImpl  (
     override fun getCharactersRepo():Flow<List<Character>>
     = localDataSource.getAllDatabaseCharacters()
 
+    override fun getListByQuery(query: String): Flow<List<Character>> =
+            localDataSource.getListByQuery(query)
+
     override suspend fun checkRequireNewPage(lastVisible: Int) {
         val size = localDataSource.size()
         if (lastVisible >= size - PAGE_THRESHOLD) {

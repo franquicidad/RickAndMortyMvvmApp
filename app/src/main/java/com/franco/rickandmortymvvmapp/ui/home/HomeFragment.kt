@@ -1,17 +1,12 @@
 package com.franco.rickandmortymvvmapp.ui.home
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.franco.rickandmortymvvmapp.R
 import com.franco.rickandmortymvvmapp.collectFlow
@@ -30,7 +25,7 @@ class HomeFragment(
 
     private  val homeViewModel: HomeViewModel by viewModels()
      var list = emptyList<Character>()
-     private var lastPosition:Int = 0
+    private lateinit var pagingAdapter:PagingAdapter
     private lateinit var binding:FragmentHomeBinding
 
     @ExperimentalCoroutinesApi
@@ -38,7 +33,7 @@ class HomeFragment(
 
          binding = FragmentHomeBinding.inflate(layoutInflater).apply {
 
-           val pagingAdapter = PagingAdapter(lifecycleScope)
+            pagingAdapter = PagingAdapter(lifecycleScope)
             recyclerCharacter.adapter=pagingAdapter
              pagingAdapter.stateRestorationPolicy=RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
@@ -59,19 +54,40 @@ class HomeFragment(
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
                     homeViewModel.notifyLastVisible(layoutManager.findLastVisibleItemPosition())
-                    lastPosition = layoutManager.findLastVisibleItemPosition()
-                    Log.i("Position", "Position---->  $lastPosition")
 
                 }
 
             })
 
         }
+        setHasOptionsMenu(true)
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_gallery,menu)
 
+        val searchItem= menu.findItem(R.id.action_search)
+        val searchView= searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query !=null){
+                    binding.recyclerCharacter.scrollToPosition(0)
+                    homeViewModel.resultByQuery(query)
+                    searchView.clearFocus()
+                    lifecycleScope.collectFlow(homeViewModel.resultByQuery(query)){
+                        pagingAdapter.submitList(it)
+                    }
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                    return true
+            }
+
+        })
     }
 }

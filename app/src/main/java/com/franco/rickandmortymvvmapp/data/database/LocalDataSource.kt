@@ -8,5 +8,6 @@ interface LocalDataSource {
     suspend fun size():Int
     suspend fun saveCharactersToDb(characters :List<Character>)
      fun getAllDatabaseCharacters(): Flow<List<Character>>
+     fun getListByQuery(query:String):Flow<List<Character>>
 
 }

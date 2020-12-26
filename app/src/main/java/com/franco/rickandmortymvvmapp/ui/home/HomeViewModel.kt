@@ -6,10 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.franco.rickandmortymvvmapp.data.domain.Character
 import com.franco.rickandmortymvvmapp.data.domain.Repository
-import com.franco.rickandmortymvvmapp.data.domain.RepositoryImpl
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 
 class HomeViewModel @ViewModelInject constructor(
@@ -20,6 +18,9 @@ class HomeViewModel @ViewModelInject constructor(
     val spinner : StateFlow <Boolean> get()=_spinner
 
     val characters :Flow<List<Character>> get() = repository.getCharactersRepo()
+
+    //val resultByQuery:Flow<List<Character>> get() = repository.getListByQuery()
+    
     init {
         viewModelScope.launch { notifyLastVisible(0) }
     }
@@ -31,5 +32,11 @@ class HomeViewModel @ViewModelInject constructor(
             }
     }
 
+    fun resultByQuery(query: String):Flow<List<Character>> {
+        return repository.getListByQuery(query)
+    }
+
 
 }
+
+
