@@ -12,7 +12,7 @@ interface CharacterDAO {
     @Query("SELECT * FROM Characters")
     fun getAllCharacters(): Flow<List<Character>>
 
-    @Query("SELECT * FROM Characters WHERE name LIKE '%' || :query ||  '%' ")
+    @Query("SELECT * FROM Characters WHERE name LIKE  '%' ||  :query  ||  '%'  ")
     fun getListBySearchBar(query:String,): Flow<List<Character>>
 
     @Query("SELECT COUNT(id) FROM Characters")

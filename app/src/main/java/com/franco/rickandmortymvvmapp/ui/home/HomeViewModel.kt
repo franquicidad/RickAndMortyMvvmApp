@@ -3,6 +3,7 @@ package com.franco.rickandmortymvvmapp.ui.home
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.franco.rickandmortymvvmapp.data.domain.Character
 import com.franco.rickandmortymvvmapp.data.domain.Repository
@@ -19,7 +20,12 @@ class HomeViewModel @ViewModelInject constructor(
 
     val characters :Flow<List<Character>> get() = repository.getCharactersRepo()
 
-    //val resultByQuery:Flow<List<Character>> get() = repository.getListByQuery()
+    val searchQuery= MutableStateFlow("")
+
+    private val charaterQueryFlow= searchQuery.flatMapLatest {
+        repository.getListByQuery(it)
+    }
+    val characterQuery = charaterQueryFlow.asLiveData()
     
     init {
         viewModelScope.launch { notifyLastVisible(0) }
@@ -31,11 +37,6 @@ class HomeViewModel @ViewModelInject constructor(
                 _spinner.value = false
             }
     }
-
-    fun resultByQuery(query: String):Flow<List<Character>> {
-        return repository.getListByQuery(query)
-    }
-
 
 }
 

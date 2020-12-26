@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.annotation.LayoutRes
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.R
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 
-fun <T> CoroutineScope.collectFlow(flow: Flow<T>, body: suspend (T) -> Unit) {
+fun <T> CoroutineScope.collectFlow(flow: Flow<T>,body:suspend (T) ->Unit) {
     flow.onEach { body(it) }
         .launchIn(this)
 }
@@ -63,4 +64,18 @@ fun ImageView.loadUrl(completeUrl: String) {
 fun ViewGroup.inflate(@LayoutRes layout: Int): View {
     val view = LayoutInflater.from(context).inflate(layout, this, false)
     return view
+}
+
+inline fun SearchView.onQueryTextChanged(crossinline listener: (String)->Unit){
+    this.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            return true
+        }
+
+        override fun onQueryTextChange(newText: String?): Boolean {
+            listener(newText.orEmpty())
+            return true
+        }
+
+    })
 }

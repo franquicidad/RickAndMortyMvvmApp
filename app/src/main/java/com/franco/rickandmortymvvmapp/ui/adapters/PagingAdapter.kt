@@ -3,6 +3,8 @@ package com.franco.rickandmortymvvmapp.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -35,23 +37,24 @@ class PagingAdapter (private val scope: CoroutineScope) :
         val item =getItem(position)
         bind(item)
         scope.collectFlow(itemView.onClickEvents){
-            val bundle = bundleOf(
-                "characterName" to item.name,
-                "species" to item.species,
-                "image" to item.image
+
+            val bundle= bundleOf(
+                    "characterName" to item.name,
+                    "image" to item.image,
+                    "species" to item.species
             )
-            navController = Navigation.findNavController(it)
-            navController!!.navigate(R.id.action_navigation_home_to_detailMortyFragment, bundle)
+            navController = Navigation.findNavController(it!!)
+            navController!!.navigate(R.id.action_navigation_home_to_detailMortyFragment,bundle)
+
         }
     }
 
 
-    class ItemViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
+    inner class ItemViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         private val binding = ViewCharacterBinding.bind(itemView)
         fun bind(item: Character) = with(binding) {
             characterName.text = item.name
             characterImage.loadUrl(item.image)
-
         }
     }
 
@@ -66,4 +69,8 @@ class DiffCallBackFromAdapter :DiffUtil.ItemCallback<Character>(){
         return oldItem == newItem
     }
 
+}
+
+interface onClickListener{
+    fun onItemClick(character: Character)
 }
