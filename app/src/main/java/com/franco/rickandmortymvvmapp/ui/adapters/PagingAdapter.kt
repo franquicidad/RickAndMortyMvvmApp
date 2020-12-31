@@ -70,7 +70,3 @@ class DiffCallBackFromAdapter :DiffUtil.ItemCallback<Character>(){
     }
 
 }
-
-interface onClickListener{
-    fun onItemClick(character: Character)
-}

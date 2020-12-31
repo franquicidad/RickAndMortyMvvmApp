@@ -1,15 +1,8 @@
 package com.franco.rickandmortymvvmapp.data.domain
 
-import com.franco.rickandmortymvvmapp.data.database.LocalDataSource
 import com.franco.rickandmortymvvmapp.data.database.LocalDataSourceImpl
-import com.franco.rickandmortymvvmapp.data.network.RemoteDataSource
 import com.franco.rickandmortymvvmapp.data.network.RemoteDataSourceImpl
-import dagger.Provides
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
-import javax.inject.Singleton
-
 
 class RepositoryImpl  (
     private val localDataSource: LocalDataSourceImpl,
@@ -30,7 +23,7 @@ class RepositoryImpl  (
         if (lastVisible >= size - PAGE_THRESHOLD) {
             val page = size / PAGE_SIZE + 1
             val newCharacters = remoteDataSource.getCharacters(page)
-            localDataSource.saveCharactersToDb(newCharacters)
+            localDataSource. saveCharactersToDb(newCharacters)
         }
     }
 }

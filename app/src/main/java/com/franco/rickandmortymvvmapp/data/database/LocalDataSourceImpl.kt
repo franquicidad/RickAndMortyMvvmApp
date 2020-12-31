@@ -16,7 +16,9 @@ class LocalDataSourceImpl @Inject constructor(
 
 
     override suspend fun saveCharactersToDb(characters: List<Character>) {
-        db.CharacterDAO().insertCharacter(characters.map { it.toDatabaseModel() })
+        db.CharacterDAO().insertCharacter(characters.map {
+            it.toDatabaseModel()
+        })
     }
 
     override fun getAllDatabaseCharacters(): Flow<List<Character>> =

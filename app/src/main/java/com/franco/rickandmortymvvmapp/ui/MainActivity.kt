@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: MainViewModel by viewModels()
+    //private val viewModel: MainViewModel by viewModels()
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 

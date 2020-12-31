@@ -13,7 +13,7 @@ interface CharacterDAO {
     fun getAllCharacters(): Flow<List<Character>>
 
     @Query("SELECT * FROM Characters WHERE name LIKE  '%' ||  :query  ||  '%'  ")
-    fun getListBySearchBar(query:String,): Flow<List<Character>>
+    fun getListBySearchBar(query:String): Flow<List<Character>>
 
     @Query("SELECT COUNT(id) FROM Characters")
     suspend fun characterCount(): Int

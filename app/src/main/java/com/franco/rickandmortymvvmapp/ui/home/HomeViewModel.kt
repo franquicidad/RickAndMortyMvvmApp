@@ -1,6 +1,5 @@
 package com.franco.rickandmortymvvmapp.ui.home
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -16,7 +15,7 @@ class HomeViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val _spinner= MutableStateFlow(true)
-    val spinner : StateFlow <Boolean> get()=_spinner
+    val spinner : StateFlow <Boolean>  get()=_spinner
 
     val characters :Flow<List<Character>> get() = repository.getCharactersRepo()
 

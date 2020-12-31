@@ -14,6 +14,7 @@ import com.franco.rickandmortymvvmapp.*
 import com.franco.rickandmortymvvmapp.databinding.FragmentHomeBinding
 import com.franco.rickandmortymvvmapp.ui.PagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
 @AndroidEntryPoint
@@ -21,6 +22,7 @@ class HomeFragment  : Fragment(R.layout.fragment_home) {
 
     private  val homeViewModel: HomeViewModel by viewModels()
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeBinding.bind(view)
@@ -36,9 +38,7 @@ class HomeFragment  : Fragment(R.layout.fragment_home) {
                     collectFlow(recyclerCharacter.lastVisibleEvents){
                         homeViewModel.notifyLastVisible(it)
                     }
-                    collectFlow(recyclerCharacter.lastVisibleEvents){
-                        homeViewModel.notifyLastVisible(it)
-                    }
+
                     collectFlow(homeViewModel.spinner){
                         progress.visible =it
                     }

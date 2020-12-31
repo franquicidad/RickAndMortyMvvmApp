@@ -31,8 +31,6 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object AppModule {
 
-
-
     @Singleton
     @Provides
     fun provideDatabase(
@@ -58,13 +56,6 @@ object AppModule {
                 .create(RMService::class.java)
                   }
 
-
-//  @Singleton
-//    @Provides
-//    fun provideRemoteDataSource():RemoteDataSource{
-//        return RemoteDataSourceImpl()
-//    }
-
     @Singleton
     @Provides
     fun provideRepository(
@@ -85,18 +76,4 @@ object AppModule {
     fun provideDetailViewModel(repositoryImpl: RepositoryImpl):DetailMortyViewModel{
         return  DetailMortyViewModel(repositoryImpl)
     }
-
-
-//    @Singleton
-//    @Provides
-//    fun providesLocalDatasource(localDataSource: LocalDataSource):LocalDataSource{
-//        return localDataSource
-//    }
-
-
-//    @Provides
-//    fun providesHomeVmToFragment(repository: Repository,localDataSource: LocalDataSource,remoteDataSource: RemoteDataSource):HomeFragment{
-//        return HomeFragment(repository, localDataSource, remoteDataSource)
-//    }
-//}
-}
+    }
